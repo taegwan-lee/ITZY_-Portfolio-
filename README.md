@@ -46,7 +46,6 @@ ITZY는 여러 사용자가 같은 Room에 접속해 제한 시간 안에 끝말
 - 플레이어 입장 순서에 따른 턴 순환
 - 10초 타이머와 라운드·게임 종료 처리
 - 현재 턴, 사전 검색 결과와 끝말 조건 검증
-- MySQL 회원 정보 및 누적 기록 연동
 - AWS EC2 서버 구동 및 클라이언트 연결
 
 ## 기술 스택
@@ -61,23 +60,6 @@ ITZY는 여러 사용자가 같은 Room에 접속해 제한 시간 안에 끝말
 | Database | MySQL | 계정과 누적 점수·플레이 횟수 저장 |
 | External API | 표준국어대사전 API | 단어 검색 및 뜻 조회 |
 | Deployment | AWS EC2 | 서버 실행 및 외부 접속 환경 |
-
-## 시스템 구조
-
-```mermaid
-flowchart LR
-    C[React Client]
-    S[Node.js / Express Server]
-    G[Room별 Game State]
-    D[(MySQL)]
-    A[표준국어대사전 API]
-
-    C <-->|HTTP<br/>회원가입 · 로그인 · 방 목록| S
-    C <-->|Socket.IO<br/>입장 · 메시지 · 턴 · 타이머 · 결과| S
-    S --> G
-    S <-->|SQL| D
-    S <-->|단어 검색 · 뜻 조회| A
-```
 
 ### HTTP와 Socket.IO의 역할
 
